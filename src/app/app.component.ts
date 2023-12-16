@@ -1,10 +1,16 @@
 import { Component } from '@angular/core';
+import { ControlService } from './services/control/control.service';
 
-@Component({
+@Component( {
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
-})
+  styleUrls: [ './app.component.scss' ]
+} )
 export class AppComponent {
-  title = 'sudoku-ai';
+
+    title = 'sudoku-ai';
+
+    constructor(
+        public controlService: ControlService
+    ) {}
 }

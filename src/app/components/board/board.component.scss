@@ -1,0 +1,33 @@
+.board {
+    width: 80%;
+    height: 80%;
+    display: table;
+}
+
+.row {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.text-input {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-size: large;
+    height: 50px;
+    width: 50px;
+}
+
+.row:nth-child(3) {
+    border-bottom: 5px solid red;
+}
+
+.cell:nth-child(3) {
+    border-right: 5px solid red;
+}
+
+.victory {
+    background-color: green !important;
+}

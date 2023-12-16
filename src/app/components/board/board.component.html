@@ -1,0 +1,9 @@
+<div class="board" [ngClass]="{ 'victory': controlService.victory }">
+    <table>
+        <tr *ngFor="let row of controlService.tiles; let i = index" class="row">
+            <td *ngFor="let cell of row; let j = index" class="cell">
+                <input [disabled]="check_disabled( cell )" class="text-input" [ngModel]="get_cell_value( cell )" maxlength="1" type="text" (ngModelChange)="onCellChange($event, i, j)">
+            </td>
+        </tr>
+    </table>
+</div>
