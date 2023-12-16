@@ -3,7 +3,6 @@
     width: 100%;
 }
 
-
 .main-body {
     background-color: #494949;
     height: 90%;
@@ -19,8 +18,13 @@
     height: 100%;
 
     .board-button,
+    game-clock,
     board {
         margin-top: 10px;
         padding: 15px;
+    }
+
+    game-clock {
+        padding: 0px;
     }
 }

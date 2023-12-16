@@ -3,6 +3,7 @@ import { Tile } from '../../interfaces/tile';
 import { GenerationService } from '../generation/generation.service';
 import { BoardChecksService } from '../board-checks/board-checks.service';
 import { Difficulty } from 'src/app/enums/difficulty';
+import { TimerService } from '../timer-service/timer.service';
 
 @Injectable( {
     providedIn: 'root'
@@ -14,7 +15,11 @@ export class ControlService {
     sidebarState: boolean = false;
     difficultyName: string = 'EASY';
 
-    constructor( private generationService: GenerationService, private boardCheckService: BoardChecksService ) {
+    constructor(
+        private generationService: GenerationService,
+        private boardCheckService: BoardChecksService,
+        private timerService: TimerService
+    ) {
         this.tiles = generationService.reset_board();
     }
 
@@ -24,6 +29,7 @@ export class ControlService {
     reset_board(): void {
         this.victory = false;
         this.tiles = this.generationService.reset_board();
+        this.timerService.start_timer();
     }
 
     /**
@@ -40,6 +46,7 @@ export class ControlService {
             }
         }
         this.victory = true;
+        this.timerService.end_timer();
     }
 
     /**

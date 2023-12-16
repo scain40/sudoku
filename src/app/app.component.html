@@ -2,6 +2,7 @@
 <div class="main-body">
     <sidebar [open]="controlService.sidebarState"></sidebar>
     <div class="board-container">
+        <game-clock></game-clock>
         <board></board>
         <button mat-fab class="board-button" extended (click)="controlService.reset_board()">
             Reset Board
