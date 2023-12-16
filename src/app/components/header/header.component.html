@@ -1,0 +1,6 @@
+<mat-toolbar>
+    <button mat-icon-button class="sidebar-closed-button" [ngClass]="{ 'sidebar-open-button': controlService.sidebarState }" (click)="controlService.toggle_sidebar()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    <span>Sudoku</span>
+</mat-toolbar>

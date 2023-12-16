@@ -1,0 +1,11 @@
+.mat-toolbar-row, .mat-toolbar-single-row {
+    height: 100%;
+}
+
+.sidebar-closed-button {
+    margin-right: 10px;
+}
+
+.sidebar-open-button {
+    background-color: var( --interactable-background-active );
+}

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Tile } from '../../interfaces/tile';
 import { GenerationService } from '../generation/generation.service';
 import { BoardChecksService } from '../board-checks/board-checks.service';
+import { Difficulty } from 'src/app/enums/difficulty';
 
 @Injectable( {
     providedIn: 'root'
@@ -10,8 +11,10 @@ export class ControlService {
 
     tiles: Tile[][] = [];
     victory: boolean = false;
+    sidebarState: boolean = false;
+    difficultyName: string = 'EASY';
 
-    constructor(private generationService: GenerationService, private boardCheckService: BoardChecksService) {
+    constructor( private generationService: GenerationService, private boardCheckService: BoardChecksService ) {
         this.tiles = generationService.reset_board();
     }
 
@@ -28,8 +31,8 @@ export class ControlService {
      * @returns 
      */
     check_victory(): void {
-        for (let i = 0; i < this.tiles.length; i++) {
-            for (let j = 0; j < this.tiles[0].length; j++) {
+        for ( let i = 0; i < this.tiles.length; i++ ) {
+            for (let j = 0; j < this.tiles[ 0 ].length; j++) {
                 if( !this.tiles[ i ][ j ].value || !this.boardCheckService.check_all( this.tiles, i, j, this.tiles[ i ][ j ].value ?? -1 ) ) {
                     this.victory = false;
                     return;
@@ -37,5 +40,21 @@ export class ControlService {
             }
         }
         this.victory = true;
+    }
+
+    /**
+     * Toggles the state of the sidebar
+     * @param force Forces the state of the sidebar to a specific value
+     */
+    toggle_sidebar( force?: boolean ): void {
+        this.sidebarState = ( force !== undefined ) ? force : !this.sidebarState;
+    }
+
+    /**
+     * Calls to change the difficulty of the game
+     * @param difficulty Difficulty value being set
+     */
+    change_difficulty( difficulty: Difficulty ): void {
+        this.tiles = this.generationService.reset_board( difficulty );
     }
 }

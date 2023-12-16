@@ -1,6 +1,9 @@
+/**
+ * Puzzle difficulty levels
+ */
 export enum Difficulty {
-    EASY = 0,
-    MEDIUM = 1,
-    HARD = 2,
-    EXPERT = 3
+    EASY = 'Easy',
+    MEDIUM = 'Medium',
+    HARD = 'Hard',
+    EXPERT = 'Expert'
 }

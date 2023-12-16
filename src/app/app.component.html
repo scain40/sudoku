@@ -1,8 +1,13 @@
-<board></board>
-<button mat-fab extended (click)="controlService.reset_board()">
-    Reset Board
-</button>
-
-<button mat-fab extended (click)="controlService.check_victory()">
-    Check Victory
-</button>
+<header class="header"></header>
+<div class="main-body">
+    <sidebar [open]="controlService.sidebarState"></sidebar>
+    <div class="board-container">
+        <board></board>
+        <button mat-fab class="board-button" extended (click)="controlService.reset_board()">
+            Reset Board
+        </button>
+        <button mat-fab class="board-button" extended (click)="controlService.check_victory()">
+            Check Victory
+        </button>
+    </div>
+</div>

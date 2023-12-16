@@ -1,0 +1,6 @@
+<div class="sidebar" [ngClass]="{ 'sidebar-open': open }">
+    <h4>Difficulty</h4>
+    <button *ngFor="let difficulty of difficulties" mat-button class="sidebar-button" [ngClass]="{ 'selected': difficulty[ 0 ] === controlService.difficultyName }" (click)="set_difficulty( difficulty[ 0 ] )">
+        {{ difficulty[ 1 ] }}
+      </button>
+</div>
