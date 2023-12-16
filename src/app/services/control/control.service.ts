@@ -63,5 +63,6 @@ export class ControlService {
      */
     change_difficulty( difficulty: Difficulty ): void {
         this.tiles = this.generationService.reset_board( difficulty );
+        this.timerService.start_timer();
     }
 }

@@ -19,6 +19,7 @@ export class TimerService {
      */
     start_timer(): void {
         this.startTime = Date.now();
+        this.timeElapsed = 0;
         this.end_timer();
         this.timerInterval = setInterval( () => {
             this.timeElapsed = Date.now() - this.startTime;
