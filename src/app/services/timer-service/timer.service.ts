@@ -12,9 +12,7 @@ export class TimerService {
     private startTime: number = 0;
     private timerInterval: any;
 
-    constructor() {
-        this.start_timer();
-    }
+    constructor() {}
 
     /**
      * Starts the timer

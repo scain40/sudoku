@@ -4,6 +4,13 @@
     display: table;
 }
 
+.starting-message {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+    width: 100%
+}
+
 .row {
     width: 100%;
     height: 100%;

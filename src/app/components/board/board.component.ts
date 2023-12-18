@@ -37,6 +37,7 @@ export class BoardComponent {
      * @returns Cell value
      */
     get_cell_value( cell: Tile ): number | undefined {
+        if( !this.controlService.playing ) { return }
         return cell.showExpected ? cell.expectedValue : cell.value;
     }
 }

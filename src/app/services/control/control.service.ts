@@ -17,6 +17,8 @@ export class ControlService {
     sidebarState: boolean = false;
     difficultyName: string = 'EASY';
     hintCount: number = 3;
+    playing: boolean = false;
+    
 
     constructor(
         private generationService: GenerationService,
@@ -32,8 +34,9 @@ export class ControlService {
      */
     reset_board(): void {
         this.victory = false;
+        this.playing = false;
+        this.hintCount = 3;
         this.tiles = this.generationService.reset_board();
-        this.timerService.start_timer();
     }
 
     /**
@@ -91,5 +94,10 @@ export class ControlService {
                 return;
             }
         }
+    }
+
+    start_game(): void {
+        this.playing = true;
+        this.timerService.start_timer();
     }
 }
