@@ -12,24 +12,23 @@
     justify-content: flex-start;
     transition: 0.2s all;
 
-    h4 {
-        margin-top: 5px;
-        margin-bottom: 5px;
-        color: var(--font-colour);
-        margin: 0;
-        padding: 0;
+    .header {
+        padding-top: 5%;
+        padding-bottom: 2%;
+        color: var( --font-colour );
+        font-size: 36px;
         text-align: center;
     }
 
     .sidebar-button {
         margin-top: 5px;
-        background-color: var(--interactable-background);
+        background-color: var( --interactable-background );
         border-radius: 5px;
         width: 80%;
     }
 
     .selected {
-        background-color: var(--interactable-background-active);
+        background-color: var( --interactable-background-active );
     }
 }
 

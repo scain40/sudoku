@@ -4,11 +4,16 @@
     <div class="board-container">
         <game-clock></game-clock>
         <board></board>
-        <button mat-fab class="board-button" extended (click)="controlService.reset_board()">
-            Reset Board
-        </button>
-        <button mat-fab class="board-button" extended (click)="controlService.check_victory()">
-            Check Victory
-        </button>
+        <div class="button-tray">
+            <button mat-fab class="board-button" extended (click)="controlService.reset_board()">
+                Reset Board
+            </button>
+            <button mat-fab class="board-button" extended (click)="controlService.check_victory()">
+                Check Victory
+            </button>
+            <button mat-fab class="board-button" extended (click)="controlService.hint()" [disabled]="controlService.hintCount <= 0">
+                Hint ({{controlService.hintCount}} Remaining)
+            </button>
+        </div>
     </div>
 </div>

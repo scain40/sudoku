@@ -3,6 +3,7 @@ import { Difficulty } from '../../enums/difficulty';
 import { Tile } from '../../interfaces/tile';
 import { TileState } from '../../enums/tile-state';
 import { BoardChecksService } from '../board-checks/board-checks.service';
+import { UtilsService } from '../utils/utils.service';
 
 @Injectable( {
     providedIn: 'root'
@@ -23,7 +24,7 @@ export class GenerationService {
     private mixCount = 1000;
     private coordinatesList: { x: number, y: number }[] = [];
 
-    constructor( private boardChecksService: BoardChecksService ) {}
+    constructor( private boardChecksService: BoardChecksService, private utils: UtilsService ) {}
 
     /**
      * Resets a game board
@@ -74,20 +75,7 @@ export class GenerationService {
                 this.coordinatesList.push( { x: i, y: j } );
             }
         }
-        this.mix_coordinates_list();
-    }
-
-    /**
-     * Mixes the coordinate list to randomise the board generation order
-     */
-    mix_coordinates_list(): void {
-        for( let x = 0; x < this.mixCount; x++ ) {
-            let firstCoordinate = Math.floor( Math.random() * this.coordinatesList.length );
-            let secondCoordinate = Math.floor( Math.random() * this.coordinatesList.length );
-            let temp = this.coordinatesList[ firstCoordinate ];
-            this.coordinatesList[ firstCoordinate ] = this.coordinatesList[ secondCoordinate ];
-            this.coordinatesList[ secondCoordinate ] = temp;
-        }
+        this.coordinatesList = this.utils.shuffle_array( this.coordinatesList, this.mixCount );
     }
 
     /**

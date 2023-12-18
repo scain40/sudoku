@@ -4,6 +4,8 @@ import { GenerationService } from '../generation/generation.service';
 import { BoardChecksService } from '../board-checks/board-checks.service';
 import { Difficulty } from 'src/app/enums/difficulty';
 import { TimerService } from '../timer-service/timer.service';
+import { UtilsService } from '../utils/utils.service';
+import { TileState } from 'src/app/enums/tile-state';
 
 @Injectable( {
     providedIn: 'root'
@@ -14,11 +16,13 @@ export class ControlService {
     victory: boolean = false;
     sidebarState: boolean = false;
     difficultyName: string = 'EASY';
+    hintCount: number = 3;
 
     constructor(
         private generationService: GenerationService,
         private boardCheckService: BoardChecksService,
-        private timerService: TimerService
+        private timerService: TimerService,
+        private utils: UtilsService
     ) {
         this.tiles = generationService.reset_board();
     }
@@ -64,5 +68,28 @@ export class ControlService {
     change_difficulty( difficulty: Difficulty ): void {
         this.tiles = this.generationService.reset_board( difficulty );
         this.timerService.start_timer();
+    }
+
+    /**
+     * Gives a hint to the user
+     */
+    hint(): void {
+        if( this.hintCount <= 0 ) { return; }
+        let coordinatesList: { x: number, y: number }[] = [];
+        for( let i = 0; i < this.tiles.length; i++ ) {
+            for( let j = 0; j < this.tiles[ 0 ].length; j++ ) {
+                coordinatesList.push( { x: i, y: j } );
+            }
+        }
+        coordinatesList = this.utils.shuffle_array( coordinatesList, 10000 );
+        for( let coordinates of coordinatesList ) {
+            if( !this.tiles[ coordinates.x ][ coordinates.y ].showExpected ) {
+                this.hintCount--;
+                this.tiles[ coordinates.x ][ coordinates.y ].value = this.tiles[ coordinates.x ][ coordinates.y ].expectedValue;
+                this.tiles[ coordinates.x ][ coordinates.y ].showExpected = true;
+                this.tiles[ coordinates.x ][ coordinates.y ].state = TileState.Default;
+                return;
+            }
+        }
     }
 }
