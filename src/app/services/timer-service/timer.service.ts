@@ -4,16 +4,18 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
 } )
 export class TimerService {
-    
+
+    /** Public variabled */
     public timeElapsed: number = 0;
 
+    /** Private Variables */
     private startTime: number = 0;
     private timerInterval: any;
 
     constructor() {
         this.start_timer();
     }
-    
+
     /**
      * Starts the timer
      */
@@ -32,5 +34,4 @@ export class TimerService {
     end_timer(): void {
         clearInterval( this.timerInterval );
     }
-
 }
