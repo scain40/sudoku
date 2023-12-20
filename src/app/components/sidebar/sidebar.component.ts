@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Difficulty } from 'src/app/enums/difficulty';
 import { ControlService } from 'src/app/services/control/control.service';
+import { StatsService } from 'src/app/services/stats/stats.service';
 
 @Component( {
     selector: 'sidebar',
@@ -13,9 +14,7 @@ export class SidebarComponent {
 
     @Input() open: boolean = false;
 
-    constructor( protected controlService: ControlService ) {
-        console.log( this.difficulties );
-    }
+    constructor( protected controlService: ControlService, private statsService: StatsService ) {}
 
     /**
      * Calls to switch difficulty and reset the game
@@ -38,6 +37,13 @@ export class SidebarComponent {
                 this.controlService.change_difficulty( Difficulty.EXPERT );
                 break;
         }
+    }
+
+    /**
+     * Opens the statistics modal
+     */
+    open_stats(): void {
+        this.statsService.open_modal();
     }
 
 }

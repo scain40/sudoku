@@ -2,5 +2,7 @@
     <div class="header">Difficulty</div>
     <button *ngFor="let difficulty of difficulties" mat-button class="sidebar-button" [ngClass]="{ 'selected': difficulty[ 0 ] === controlService.difficultyName }" (click)="set_difficulty( difficulty[ 0 ] )">
         {{ difficulty[ 1 ] }}
-      </button>
+    </button>
+    <div class="header">Additional</div>
+    <button mat-button class="sidebar-button" (click)="open_stats()">Stats</button>
 </div>
