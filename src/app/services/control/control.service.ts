@@ -6,6 +6,7 @@ import { Difficulty } from 'src/app/enums/difficulty';
 import { TimerService } from '../timer-service/timer.service';
 import { UtilsService } from '../utils/utils.service';
 import { TileState } from 'src/app/enums/tile-state';
+import { StatsService } from '../stats/stats.service';
 
 @Injectable( {
     providedIn: 'root'
@@ -14,17 +15,18 @@ export class ControlService {
 
     tiles: Tile[][] = [];
     victory: boolean = false;
+    loss: boolean = false;
     sidebarState: boolean = false;
     difficultyName: string = 'EASY';
     hintCount: number = 3;
     playing: boolean = false;
-    
 
     constructor(
         private generationService: GenerationService,
         private boardCheckService: BoardChecksService,
         private timerService: TimerService,
-        private utils: UtilsService
+        private utils: UtilsService,
+        private statsService: StatsService
     ) {
         this.tiles = generationService.reset_board();
     }
@@ -34,6 +36,7 @@ export class ControlService {
      */
     reset_board(): void {
         this.victory = false;
+        this.loss = false;
         this.playing = false;
         this.hintCount = 3;
         this.tiles = this.generationService.reset_board();
@@ -41,18 +44,21 @@ export class ControlService {
 
     /**
      * Checks to see if a user has won the game
-     * @returns 
      */
     check_victory(): void {
+        const difficulty = this.generationService.difficulty;
         for ( let i = 0; i < this.tiles.length; i++ ) {
             for (let j = 0; j < this.tiles[ 0 ].length; j++) {
                 if( !this.tiles[ i ][ j ].value || !this.boardCheckService.check_all( this.tiles, i, j, this.tiles[ i ][ j ].value ?? -1 ) ) {
-                    this.victory = false;
+                    this.loss = true;
+                    this.statsService.add_loss( difficulty );
+                    this.timerService.end_timer();
                     return;
                 }
             }
         }
         this.victory = true;
+        this.statsService.add_victory( difficulty );
         this.timerService.end_timer();
     }
 
@@ -96,6 +102,9 @@ export class ControlService {
         }
     }
 
+    /**
+     * Starts the game
+     */
     start_game(): void {
         this.playing = true;
         this.timerService.start_timer();

@@ -18,7 +18,7 @@ export class BoardComponent {
      * @param row Row value is being set on
      * @param column Column value is being set on
      */
-    onCellChange( value: number, row: number, column: number ): void {
+    on_cell_change( value: number, row: number, column: number ): void {
         this.controlService.tiles[ row ][ column ].value = value;
     }
 
