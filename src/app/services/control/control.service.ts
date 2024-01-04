@@ -33,13 +33,14 @@ export class ControlService {
 
     /**
      * Calls to reset a board and victory status
+     * @param difficulty Optional setting of a difficulty when resetting the board
      */
-    reset_board(): void {
+    reset_board( difficulty?: Difficulty ): void {
         this.victory = false;
         this.loss = false;
         this.playing = false;
         this.hintCount = 3;
-        this.tiles = this.generationService.reset_board();
+        this.tiles = this.generationService.reset_board( difficulty );
     }
 
     /**
@@ -68,15 +69,6 @@ export class ControlService {
      */
     toggle_sidebar( force?: boolean ): void {
         this.sidebarState = ( force !== undefined ) ? force : !this.sidebarState;
-    }
-
-    /**
-     * Calls to change the difficulty of the game
-     * @param difficulty Difficulty value being set
-     */
-    change_difficulty( difficulty: Difficulty ): void {
-        this.tiles = this.generationService.reset_board( difficulty );
-        this.timerService.start_timer();
     }
 
     /**

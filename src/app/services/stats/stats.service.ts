@@ -19,7 +19,7 @@ export class StatsService {
      * Opens the stats modal component
      */
     open_modal(): void {
-        this.dialog.open( StatsModalComponent );
+        this.dialog.open( StatsModalComponent, { panelClass: 'stats-modal' } );
     }
 
     /**

@@ -2,11 +2,11 @@
     <div class="header-text">
         Statistics
     </div>
-    <button mat-button mat-dialog-close click="close_modal()">
+    <button mat-button mat-dialog-close class="close-button" click="close_modal()">
         <mat-icon aria-hidden="false" aria-label="Close Statistics" fontIcon="close"></mat-icon>
     </button>
 </div>
-<div mat-dialog-content>
+<div mat-dialog-content cdkFocusRegionstart class="stats-content">
     <div class="stat-title">Success Rates</div>
     <div class="stat-block">
         <div class="stat-tag">Easy</div>

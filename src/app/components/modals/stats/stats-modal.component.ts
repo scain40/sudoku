@@ -21,7 +21,7 @@ export class StatsModalComponent extends BaseModalComponent {
      */
     get_win_percent( difficulty: string ): string {
         if( this.statsService.stats[ difficulty ].total === 0 ) {
-            return '0.00%';
+            return '0%';
         }
         return ( ( 100 / this.statsService.stats[ difficulty ].total ) * this.statsService.stats[ difficulty ].wins ) + '%';
     }

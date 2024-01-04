@@ -21,20 +21,19 @@ export class SidebarComponent {
      * @param difficulty Difficulty value being set
      */
     set_difficulty( difficulty: string ): void {
-        console.log('Setting difficulty to ' + difficulty);
         this.controlService.difficultyName = difficulty;
         switch( difficulty ) {
             case 'EASY':
-                this.controlService.change_difficulty( Difficulty.EASY );
+                this.controlService.reset_board( Difficulty.EASY );
                 break;
             case 'MEDIUM':
-                this.controlService.change_difficulty( Difficulty.MEDIUM );
+                this.controlService.reset_board( Difficulty.MEDIUM );
                 break;
             case 'HARD':
-                this.controlService.change_difficulty( Difficulty.HARD );
+                this.controlService.reset_board( Difficulty.HARD );
                 break;
             case 'EXPERT':
-                this.controlService.change_difficulty( Difficulty.EXPERT );
+                this.controlService.reset_board( Difficulty.EXPERT );
                 break;
         }
     }

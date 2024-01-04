@@ -4,5 +4,35 @@
 
 .header-contents {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+    height: 15%;
+    background-color: var( --background-dark );
+
+    .header-text {
+        padding: 1%;
+    }
+
+    .close-button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+    }
+}
+
+.stats-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 10%;
+
+    .stat-title {
+        display: flex;
+        justify-content: center;
+    }
+
+    .stat-block {
+        padding: 1%;
+    }
 }
