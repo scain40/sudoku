@@ -8,9 +8,8 @@ import { ControlService } from './services/control/control.service';
 } )
 export class AppComponent {
 
-    title = 'sudoku-ai';
+    title = 'sudoku';
 
-    constructor(
-        public controlService: ControlService
-    ) {}
+    constructor( public controlService: ControlService ) {}
+
 }

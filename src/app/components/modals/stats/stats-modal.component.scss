@@ -1,6 +1,19 @@
 @import '../base/base-modal.component.scss';
 
-.stat-block {
+.stats-content {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 10%;
+
+    .stat-title {
+        display: flex;
+        justify-content: center;
+    }
+
+    .stat-block {
+        display: flex;
+        justify-content: space-between;
+        padding: 1%;
+    }
 }

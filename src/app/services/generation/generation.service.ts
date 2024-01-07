@@ -11,7 +11,7 @@ import { UtilsService } from '../utils/utils.service';
 export class GenerationService {
 
     private boardValid: boolean = true;
-    private difficulty: Difficulty = Difficulty.EASY;
+    difficulty: Difficulty = Difficulty.EASY;
 
     private boardSize = 6;
     private dificultyHints: { [ key in Difficulty ]: number } = {

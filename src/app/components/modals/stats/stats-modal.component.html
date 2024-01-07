@@ -2,26 +2,26 @@
     <div class="header-text">
         Statistics
     </div>
-    <button mat-button mat-dialog-close click="close_modal()">
+    <button mat-button mat-dialog-close class="close-button" click="close_modal()">
         <mat-icon aria-hidden="false" aria-label="Close Statistics" fontIcon="close"></mat-icon>
     </button>
 </div>
-<div mat-dialog-content>
+<div mat-dialog-content cdkFocusRegionstart class="stats-content">
     <div class="stat-title">Success Rates</div>
     <div class="stat-block">
         <div class="stat-tag">Easy</div>
-        <div class="stat-value">0.00%</div>
+        <div class="stat-value">{{get_win_percent( 'Easy' )}}</div>
     </div>
     <div class="stat-block">
         <div class="stat-tag">Medium</div>
-        <div class="stat-value">0.00%</div>
+        <div class="stat-value">{{get_win_percent( 'Medium' )}}</div>
     </div>
     <div class="stat-block">
         <div class="stat-tag">Hard</div>
-        <div class="stat-value">0.00%</div>
+        <div class="stat-value">{{get_win_percent( 'Hard' )}}</div>
     </div>
     <div class="stat-block">
         <div class="stat-tag">Expert</div>
-        <div class="stat-value">0.00%</div>
+        <div class="stat-value">{{get_win_percent( 'Expert' )}}</div>
     </div>
 </div>
