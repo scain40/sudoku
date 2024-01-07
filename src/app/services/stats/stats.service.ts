@@ -7,9 +7,9 @@ import { StatsModalComponent } from 'src/app/components/modals/stats/stats-modal
 } )
 export class StatsService {
 
-    modalOpen: boolean = false;
-
-    constructor( private dialog: MatDialog ) {}
+    constructor(
+        private dialog: MatDialog
+    ) {}
 
     open_modal(): void {
         this.dialog.open( StatsModalComponent );
