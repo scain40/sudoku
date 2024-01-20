@@ -22,13 +22,13 @@ export class ControlService {
     playing: boolean = false;
 
     constructor(
-        private generationService: GenerationService,
+        private GenerationService: GenerationService,
         private boardCheckService: BoardChecksService,
         private timerService: TimerService,
         private utils: UtilsService,
         private statsService: StatsService
     ) {
-        this.tiles = generationService.reset_board();
+        this.tiles = GenerationService.reset_board();
     }
 
     /**
@@ -40,14 +40,14 @@ export class ControlService {
         this.loss = false;
         this.playing = false;
         this.hintCount = 3;
-        this.tiles = this.generationService.reset_board( difficulty );
+        this.tiles = this.GenerationService.reset_board( difficulty );
     }
 
     /**
      * Checks to see if a user has won the game
      */
     check_victory(): void {
-        const difficulty = this.generationService.difficulty;
+        const difficulty = this.GenerationService.difficulty;
         for ( let i = 0; i < this.tiles.length; i++ ) {
             for (let j = 0; j < this.tiles[ 0 ].length; j++) {
                 if( !this.tiles[ i ][ j ].value || !this.boardCheckService.check_all( this.tiles, i, j, this.tiles[ i ][ j ].value ?? -1 ) ) {

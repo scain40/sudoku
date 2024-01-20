@@ -15,6 +15,7 @@ export class GenerationService {
 
     private boardSize = 6;
     private dificultyHints: { [ key in Difficulty ]: number } = {
+        [ Difficulty.TEST ]: 0,
         [ Difficulty.EASY ]: 20,
         [ Difficulty.MEDIUM ]: 40,
         [ Difficulty.HARD ]: 60,

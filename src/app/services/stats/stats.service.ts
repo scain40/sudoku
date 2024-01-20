@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { StatsModalComponent } from 'src/app/components/modals/stats/stats-modal.component';
 import { Difficulty } from 'src/app/enums/difficulty';
 import { DefaultDifficultyStats, DifficultyStats } from 'src/app/interfaces/stats';
+import { WebsocketService } from '../websocket/websocket.service';
 
 @Injectable( {
     providedIn: 'root'
@@ -11,8 +12,9 @@ export class StatsService {
 
     stats: { [ key: string ]: DifficultyStats } = {};
 
-    constructor( private dialog: MatDialog ) {
+    constructor( private dialog: MatDialog, private socket: WebsocketService ) {
         this.get_stats();
+        this.socket.socket.on( 'return:stats', this.set_stats.bind( this ) );
     }
 
     /**
@@ -29,7 +31,7 @@ export class StatsService {
     add_victory( difficulty: Difficulty ): void {
         this.stats[ difficulty ].wins++;
         this.stats[ difficulty ].total++;
-        this.update_stats();
+        this.update_stats( difficulty );
     }
 
     /**
@@ -39,27 +41,42 @@ export class StatsService {
     add_loss( difficulty: Difficulty ): void {
         this.stats[ difficulty ].losses++;
         this.stats[ difficulty ].total++;
-        this.update_stats();
+        this.update_stats( difficulty );
     }
 
     /**
      * Updates the stoage of statistics
-     * TODO Move out of localstorage
+     * @param difficulty Difficulty being updated
      */
-    update_stats(): void {
-        window.localStorage.setItem( 'statistics', JSON.stringify( this.stats ) );
+    update_stats( difficulty: Difficulty ): void {
+        this.socket.socket.emit( 'update:stats', { difficulty: difficulty, details: this.stats[ difficulty ] } );
     }
 
     /**
      * Gets statistics from storage
-     * TODO Move out of localstorage
      */
     get_stats(): void {
-        let stats = window.localStorage.getItem( 'statistics' );
+        this.set_default_stats();
+        this.socket.socket.emit( 'get:stats' );
+    }
+
+    /**
+     * Calls to set the stats from a websocket response
+     * @param stats Stats being returned from the websocket
+     * @returns 
+     */
+    private set_stats( stats?: { [ key: string ]: DifficultyStats } ): void {
         if( stats ) {
-            this.stats = JSON.parse( stats );
+            this.stats = stats;
             return;
         }
+        this.set_default_stats();
+    }
+
+    /**
+     * Sets up default stat values
+     */
+    private set_default_stats(): void {
         // Default state for statistics
         this.stats = {};
         this.stats[ Difficulty.EASY ] = Object.assign( {}, DefaultDifficultyStats );
